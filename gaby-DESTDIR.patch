@@ -1,0 +1,17 @@
+--- src/Makefile.in~	Sat Jul  7 12:31:45 2001
++++ src/Makefile.in	Mon Oct  8 23:04:42 2001
+@@ -660,10 +660,10 @@
+ install-exec-local:
+ 	for F in $(APPS); \
+ 	do \
+-		if [ -h $(prefix)/bin/$$F ]; \
+-		then rm $(prefix)/bin/$$F; fi ; \
+-		if [ ! -f $(prefix)/bin/$$F ]; \
+-		then ln -s gaby $(prefix)/bin/$$F; fi ; \
++		if [ -h $(DESTDIR)$(prefix)/bin/$$F ]; \
++		then rm $(DESTDIR)$(prefix)/bin/$$F; fi ; \
++		if [ ! -f $(DESTDIR)$(prefix)/bin/$$F ]; \
++		then ln -s gaby $(DESTDIR)$(prefix)/bin/$$F; fi ; \
+ 	done
+ 
+ distclean-local:
