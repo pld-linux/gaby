@@ -1,11 +1,11 @@
 #
 # Conditional build:
-# _without_gtk		- without gtk+-based gui (text only)
-# _without_python	- plain gtk-based version without python support
-# _without_gnome	- without gnome-based support
-# _without_libglade	- without libglade config
-# _without_xml		- without xml config
-# _without_gdk_pixbuf	- without gdk-pixbuf
+%bcond_without  gtk		# without gtk+-based gui (text only)
+%bcond_without	python		# plain gtk-based version without python support
+%bcond_without	gnome		# without gnome-based support
+%bcond_without	libglade	# without libglade config
+%bcond_without	xml		# without xml config
+%bcond_without	gdk_pixbuf	# without gdk-pixbuf
 #
 Summary:	Gaby is a small personal databases manager
 Summary(pl):	Gaby - ma³y osobisty zarz±dca baz danych
@@ -23,21 +23,21 @@ URL:		http://gaby.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
-%{!?_without_gdk_pixbuf:BuildRequires:	gdk-pixbuf-devel >= 0.7.0}
+%{?with_gdk_pixbuf:BuildRequires:	gdk-pixbuf-devel >= 0.7.0}
 BuildRequires:	gettext-devel
-%{!?_without_gnome:BuildRequires:	gnome-libs-devel}
-%{!?_without_gui:BuildRequires:		gtk+-devel >= 1.2.5}
-%{!?_without_libglade:BuildRequires:	libglade-devel}
+%{?with_gnome:BuildRequires:	gnome-libs-devel}
+%{?with_gui:BuildRequires:		gtk+-devel >= 1.2.5}
+%{?with_libglade:BuildRequires:	libglade-devel}
 BuildRequires:	libtool
-%{!?_without_libglade:BuildRequires:	libxml-devel}
-%{!?_without_xml:BuildRequires:		libxml-devel}
-%{!?_without_python:BuildRequires:	python-devel}
-%{!?_without_python:BuildRequires:	python-pygtk < 1.99}
+%{?with_libglade:BuildRequires:	libxml-devel}
+%{?with_xml:BuildRequires:		libxml-devel}
+%{?with_python:BuildRequires:	python-devel}
+%{?with_python:BuildRequires:	python-pygtk < 1.99}
 # python-pygtk and gtk+-devel require to be installed with the same prefix
 # to be visible; currently not this case :(
-%{!?_without_python:%{!?_without_gui:Requires:	python-pygtk < 1.99}}
-%{!?_without_gui:Requires:	gtk+ >= 1.2.5}
-%{!?_without_python:Requires:	python}
+%{?with_python:%{?with_gui:Requires:	python-pygtk < 1.99}}
+%{?with_gui:Requires:	gtk+ >= 1.2.5}
+%{?with_python:Requires:	python}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -70,12 +70,12 @@ zosta³ zaprojektowany tak, by byæ rozszerzalnym poprzez wtyczki.
 %{__automake}
 CPPFLAGS="`gdk-pixbuf-config --cflags` `libglade-config --cflags` `orbit-config --cflags client`"
 %configure \
-	%{?_without_gnome:--disable-gnome} \
-	%{?_without_python:--disable-python} \
-	%{?_without_gtk:--disable-gui} \
-	%{?_without_libglade:--without-libglade-config} \
-	%{?_without_xml:--without-xml-config} \
-	%{?_without_gdk_pixbuf:--disable-gdk_pixbuftest} \
+	%{!?with_gnome:--disable-gnome} \
+	%{!?with_python:--disable-python} \
+	%{!?with_gtk:--disable-gui} \
+	%{!?with_libglade:--without-libglade-config} \
+	%{!?with_xml:--without-xml-config} \
+	%{!?with_gdk_pixbuf:--disable-gdk_pixbuftest} \
 
 %{__make}
 
