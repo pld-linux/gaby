@@ -41,7 +41,7 @@ BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Gaby is a small personal databases manager using GTK+ and Gnome (if
+Gaby is a small personal databases manager using GTK+ and GNOME (if
 available) for its GUI. It was designed to provide straight-forward
 access to databases a 'normal' user would like (addresses, books, ...)
 while keeping the ability to easily create databases for other needs.
