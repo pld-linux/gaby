@@ -30,7 +30,7 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make prefix=$RPM_BUILD_ROOT%{_prefix} install-strip
+%{__make} prefix=$RPM_BUILD_ROOT%{_prefix} install-strip
 for F in `find $RPM_BUILD_ROOT%{_prefix} -perm -111`
 do
 	strip $F || true
