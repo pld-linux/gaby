@@ -26,7 +26,7 @@ relies a lot on plug-ins.
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%{_prefix} --sysconfdir=%{_sysconfdir}
-make
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
