@@ -1,7 +1,7 @@
 Summary:	Gaby is a small personal databases manager
 Summary(pl):	Gaby - ma³y osobisty menad¿er baz danych
 Name:		gaby
-Version:	1.9.20
+Version:	2.0.2
 Release:	1
 Group:		X11/Applications
 Group(de):	X11/Applikationen
@@ -11,6 +11,7 @@ Url:		http://gaby.sourceforge.net/
 Source0:	http://gaby.sourceforge.net/archives/%{name}-%{version}.tar.gz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	gtk+-devel >= 1.2.0
+BuildRequires:	libxml-devel
 
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
