@@ -35,8 +35,6 @@ BuildRequires:	bison
 # to be visible; currently not this case :(
 %{!?_without_python:%{!?_without_gui:Requires:	python-pygtk}}
 
-%define		_prefix		/usr/X11R6
-%define		_mandir		%{_prefix}/man
 
 %description
 Gaby is a small personal databases manager using GTK+ and Gnome (if
