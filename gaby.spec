@@ -94,7 +94,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS BUGS ChangeLog NEWS README* TODO* misc/Gabyrc 
+%doc AUTHORS BUGS ChangeLog NEWS README* TODO* misc/Gabyrc
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/%{name}
 %{_sysconfdir}/gaby
