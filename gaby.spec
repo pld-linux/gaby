@@ -2,8 +2,9 @@ Summary:	Gaby is a small personal databases manager
 Name:		gaby
 Version:	1.9.20
 Release:	1
-Group:		X11/GNOME/Applications
-Group(pl):	X11/GNOME/Aplikacje
+Group:		X11/Applications
+Group(de):	X11/Applikationen
+Group(pl):	X11/Aplikacje
 License:	GPL
 Url:		http://gaby.netpedia.net
 Source0:	%{name}-%{version}.tar.gz
@@ -25,26 +26,24 @@ relies a lot on plug-ins.
 %setup -q
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%{_prefix} --sysconfdir=%{_sysconfdir}
+CFLAGS="%{rpmcflags}" ./configure --prefix=%{_prefix} --sysconfdir=%{_sysconfdir}
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} prefix=$RPM_BUILD_ROOT%{_prefix} install-strip
-for F in `find $RPM_BUILD_ROOT%{_prefix} -perm -111`
-do
-	strip $F || true
-done
+%{__make} prefix=$RPM_BUILD_ROOT%{_prefix} install
+
+gzip -9nf AUTHORS BUGS ChangeLog NEWS README* TODO*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS BUGS COPYING ChangeLog Gabyrc INSTALL NEWS README 
-%doc README.translations README.upgrading TODO TODO.more gaby.lsm 
+%doc AUTHORS.gz BUGS.gz ChangeLog.gz Gabyrc NEWS.gz README.gz
+%doc README.translations.gz README.upgrading.gz TODO.gz TODO.more.gz 
 %doc doc/*.sgml doc/C/*.sgml 
-%%{_sysconfdir}/gaby
+%{_sysconfdir}/gaby
 %{_libdir}/gaby
 %{_datadir}/gaby
 %attr(755,root,root) %{_bindir}/gaby 
@@ -54,13 +53,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/videobase 
 %attr(755,root,root) %{_bindir}/gnomecard 
 %attr(755,root,root) %{_bindir}/builder
-%{_datadir}/locale/da/LC_MESSAGES/gaby.mo
-%{_datadir}/locale/de/LC_MESSAGES/gaby.mo
-%{_datadir}/locale/es/LC_MESSAGES/gaby.mo
-%{_datadir}/locale/fi/LC_MESSAGES/gaby.mo
-%{_datadir}/locale/fr/LC_MESSAGES/gaby.mo
-%{_datadir}/locale/ja/LC_MESSAGES/gaby.mo
-%{_datadir}/locale/nl/LC_MESSAGES/gaby.mo
-%{_datadir}/locale/no/LC_MESSAGES/gaby.mo
-%{_datadir}/locale/pl/LC_MESSAGES/gaby.mo
-%{_datadir}/locale/sv/LC_MESSAGES/gaby.mo
+%lang(da) %{_datadir}/locale/da/LC_MESSAGES/gaby.mo
+%lang(de) %{_datadir}/locale/de/LC_MESSAGES/gaby.mo
+%lang(es) %{_datadir}/locale/es/LC_MESSAGES/gaby.mo
+%lang(fi) %{_datadir}/locale/fi/LC_MESSAGES/gaby.mo
+%lang(fr) %{_datadir}/locale/fr/LC_MESSAGES/gaby.mo
+%lang(ja) %{_datadir}/locale/ja/LC_MESSAGES/gaby.mo
+%lang(nl) %{_datadir}/locale/nl/LC_MESSAGES/gaby.mo
+%lang(no) %{_datadir}/locale/no/LC_MESSAGES/gaby.mo
+%lang(pl) %{_datadir}/locale/pl/LC_MESSAGES/gaby.mo
+%lang(sv) %{_datadir}/locale/sv/LC_MESSAGES/gaby.mo
