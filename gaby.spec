@@ -8,7 +8,7 @@
 # _without_gdk_pixbuf	- without gdk-pixbuf
 #
 Summary:	Gaby is a small personal databases manager
-Summary(pl):	Gaby - ma³y osobisty menad¿er baz danych
+Summary(pl):	Gaby - ma³y osobisty zarz±dca baz danych
 Name:		gaby
 Version:	2.0.2
 Release:	1
@@ -47,11 +47,11 @@ On a technical side it was designed with extensibility in mind and
 relies a lot on plug-ins.
 
 %description -l pl
-Gaby jest ma³ym osobistym menad¿erem baz danych u¿ywaj±cym GTK+ i
-GNOME. Zosta³ zaprojektowany aby dostarczyæ prosty dostêp do baz
+Gaby jest ma³ym osobistym zarz±dc± baz danych u¿ywaj±cym GTK+ i
+GNOME. Zosta³ zaprojektowany aby udostêpniæ prosty dostêp do baz
 danych, które "zwyk³y" u¿ytkownik chcia³by mieæ (adresy, ksi±¿ki...),
 pozwalaj±c ³atwo tworzyæ bazy do innych celów. Od technicznej strony
-zosta³ zaprojektowany tak, by byæ rozszerzalnym poprzez pluginy.
+zosta³ zaprojektowany tak, by byæ rozszerzalnym poprzez wtyczki.
 
 %prep
 %setup -q
@@ -74,15 +74,13 @@ CFLAGS="%{rpmcflags}" ./configure \
 rm -rf $RPM_BUILD_ROOT
 %{__make} prefix=$RPM_BUILD_ROOT%{_prefix} install
 
-gzip -9nf AUTHORS BUGS ChangeLog NEWS README* TODO*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS.gz BUGS.gz ChangeLog.gz Gabyrc NEWS.gz README.gz
-%doc README.translations.gz README.upgrading.gz TODO.gz TODO.more.gz
+%doc AUTHORS BUGS ChangeLog NEWS README* TODO* Gabyrc 
 %doc doc/*.sgml doc/C/*.sgml
 %{_sysconfdir}/gaby
 %{_libdir}/gaby
