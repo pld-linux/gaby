@@ -1,3 +1,12 @@
+#
+# Conditional build:
+# _without_gtk		- without gtk+-based gui (text only)
+# _without_python	- plain gtk-based version without python support
+# _without_gnome	- without gnome-based support
+# _without_libglade	- without libglade config
+# _without_xml		- without xml config
+# _without_gdk_pixbuf	- without gdk-pixbuf
+#
 Summary:	Gaby is a small personal databases manager
 Summary(pl):	Gaby - ma³y osobisty menad¿er baz danych
 Name:		gaby
@@ -9,9 +18,24 @@ Group(pl):	X11/Aplikacje
 License:	GPL
 Url:		http://gaby.sourceforge.net/
 Source0:	http://gaby.sourceforge.net/archives/%{name}-%{version}.tar.gz
+Patch0:		gaby-DESTDIR.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-BuildRequires:	gtk+-devel >= 1.2.0
-BuildRequires:	libxml-devel
+BuildRequires:	libtool
+BuildRequires:	bison
+%{!?_without_gui:BuildRequires:		gtk+-devel >= 1.2.0}
+%{!?_without_python:BuildRequires:	python-devel}
+%{!?_without_gnome:BuildRequires:	gnome-libs-devel}
+%{!?_without_libglade:BuildRequires:	libglade-devel}
+# shouldn't this dependency be moved to libglade-devel ?
+%{!?_without_libglade:BuildRequires:	libxml-devel}
+%{!?_without_xml:BuildRequires:		libxml-devel}
+%{!?_without_gdk_pixbuf:BuildRequires:	gdk-pixbuf-devel}
+%{!?_without_gui:Requires:	gtk+ >= 1.2.0}
+%{!?_without_python:Requires:	python}
+%{!?_without_gnome:Requires:	gnome-libs}
+# python-pygtk and gtk+-devel require to be installed with the same prefix
+# to be visible; currently not this case :(
+%{!?_without_python:%{!?_without_gui:Requires:	python-pygtk}}
 
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
@@ -33,9 +57,19 @@ zosta³ zaprojektowany tak, by byæ rozszerzalnym poprzez pluginy.
 
 %prep
 %setup -q
+%patch0 -p0
 
 %build
-CFLAGS="%{rpmcflags}" ./configure --prefix=%{_prefix} --sysconfdir=%{_sysconfdir}
+CFLAGS="%{rpmcflags}" ./configure \
+	--prefix=%{_prefix} \
+	--sysconfdir=%{_sysconfdir} \
+	%{?_without_gnome:--disable-gnome} \
+	%{?_without_python:--disable-python} \
+	%{?_without_gtk:--disable-gui} \
+	%{?_without_libglade:--without-libglade-config} \
+	%{?_without_xml:--without-xml-config} \
+	%{?_without_gdk_pixbuf:--disable-gdk_pixbuftest} \
+	
 %{__make}
 
 %install
