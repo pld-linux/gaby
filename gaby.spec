@@ -17,21 +17,26 @@ Group:		X11/Applications
 Source0:	http://gaby.sourceforge.net/archives/%{name}-%{version}.tar.gz
 # Source0-md5:	1203f7a548e46bc0bf5987fb2e1508ee
 Patch0:		%{name}-DESTDIR.patch
+Patch1:		%{name}-gcc33.patch
+Patch2:		%{name}-doc.patch
 URL:		http://gaby.sourceforge.net/
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	bison
-%{!?_without_gdk_pixbuf:BuildRequires:	gdk-pixbuf-devel}
+%{!?_without_gdk_pixbuf:BuildRequires:	gdk-pixbuf-devel >= 0.7.0}
+BuildRequires:	gettext-devel
 %{!?_without_gnome:BuildRequires:	gnome-libs-devel}
-%{!?_without_gui:BuildRequires:		gtk+-devel >= 1.2.0}
+%{!?_without_gui:BuildRequires:		gtk+-devel >= 1.2.5}
 %{!?_without_libglade:BuildRequires:	libglade-devel}
 BuildRequires:	libtool
 %{!?_without_libglade:BuildRequires:	libxml-devel}
 %{!?_without_xml:BuildRequires:		libxml-devel}
 %{!?_without_python:BuildRequires:	python-devel}
+%{!?_without_python:BuildRequires:	python-pygtk < 1.99}
 # python-pygtk and gtk+-devel require to be installed with the same prefix
 # to be visible; currently not this case :(
-%{!?_without_python:%{!?_without_gui:Requires:	python-pygtk}}
-%{!?_without_gnome:Requires:	gnome-libs}
-%{!?_without_gui:Requires:	gtk+ >= 1.2.0}
+%{!?_without_python:%{!?_without_gui:Requires:	python-pygtk < 1.99}}
+%{!?_without_gui:Requires:	gtk+ >= 1.2.5}
 %{!?_without_python:Requires:	python}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -52,12 +57,19 @@ zosta³ zaprojektowany tak, by byæ rozszerzalnym poprzez wtyczki.
 
 %prep
 %setup -q
-%patch0 -p0
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
-CFLAGS="%{rpmcflags}" ./configure \
-	--prefix=%{_prefix} \
-	--sysconfdir=%{_sysconfdir} \
+%{__gettextize}
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+CPPFLAGS="`gdk-pixbuf-config --cflags` `libglade-config --cflags` `orbit-config --cflags client`"
+%configure \
 	%{?_without_gnome:--disable-gnome} \
 	%{?_without_python:--disable-python} \
 	%{?_without_gtk:--disable-gui} \
@@ -71,32 +83,27 @@ CFLAGS="%{rpmcflags}" ./configure \
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	prefix=$RPM_BUILD_ROOT%{_prefix}
+	DESTDIR=$RPM_BUILD_ROOT
+
+find $RPM_BUILD_ROOT%{_libdir}/%{name} -name '*.a' -o -name '*.la' | xargs rm -f
+
+%find_lang %{name} --with-gnome
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS BUGS ChangeLog NEWS README* TODO* Gabyrc 
-%doc doc/*.sgml doc/C/*.sgml
+%doc AUTHORS BUGS ChangeLog NEWS README* TODO* misc/Gabyrc 
+%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_libdir}/%{name}
 %{_sysconfdir}/gaby
-%{_libdir}/gaby
-%{_datadir}/gaby
-%attr(755,root,root) %{_bindir}/gaby
-%attr(755,root,root) %{_bindir}/gabyprint
-%attr(755,root,root) %{_bindir}/gbc
-%attr(755,root,root) %{_bindir}/gcd
-%attr(755,root,root) %{_bindir}/videobase
-%attr(755,root,root) %{_bindir}/gnomecard
-%attr(755,root,root) %{_bindir}/builder
-%lang(da) %{_datadir}/locale/da/LC_MESSAGES/gaby.mo
-%lang(de) %{_datadir}/locale/de/LC_MESSAGES/gaby.mo
-%lang(es) %{_datadir}/locale/es/LC_MESSAGES/gaby.mo
-%lang(fi) %{_datadir}/locale/fi/LC_MESSAGES/gaby.mo
-%lang(fr) %{_datadir}/locale/fr/LC_MESSAGES/gaby.mo
-%lang(ja) %{_datadir}/locale/ja/LC_MESSAGES/gaby.mo
-%lang(nl) %{_datadir}/locale/nl/LC_MESSAGES/gaby.mo
-%lang(no) %{_datadir}/locale/no/LC_MESSAGES/gaby.mo
-%lang(pl) %{_datadir}/locale/pl/LC_MESSAGES/gaby.mo
-%lang(sv) %{_datadir}/locale/sv/LC_MESSAGES/gaby.mo
+%dir %{_datadir}/gaby
+%{_datadir}/gaby/glade
+%{_datadir}/gaby/scripts
+%{_datadir}/gaby/gaby_tips.txt
+%lang(de) %{_datadir}/gaby/gaby_tips_de.txt
+%lang(fi) %{_datadir}/gaby/gaby_tips_fi.txt
+%lang(fr) %{_datadir}/gaby/gaby_tips_fr.txt
+%lang(no) %{_datadir}/gaby/gaby_tips_no.txt
+%{_mandir}/man1/*
