@@ -16,6 +16,7 @@ Group:		X11/Applications
 License:	GPL
 Url:		http://gaby.sourceforge.net/
 Source0:	http://gaby.sourceforge.net/archives/%{name}-%{version}.tar.gz
+# Source0-md5:	1203f7a548e46bc0bf5987fb2e1508ee
 Patch0:		%{name}-DESTDIR.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	libtool
