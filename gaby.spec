@@ -105,5 +105,5 @@ rm -rf $RPM_BUILD_ROOT
 %lang(de) %{_datadir}/gaby/gaby_tips_de.txt
 %lang(fi) %{_datadir}/gaby/gaby_tips_fi.txt
 %lang(fr) %{_datadir}/gaby/gaby_tips_fr.txt
-%lang(no) %{_datadir}/gaby/gaby_tips_no.txt
+%lang(nb) %{_datadir}/gaby/gaby_tips_no.txt
 %{_mandir}/man1/*
