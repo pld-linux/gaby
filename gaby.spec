@@ -1,4 +1,5 @@
 Summary:	Gaby is a small personal databases manager
+Summary(pl):	Gaby - ma³y osobisty menad¿er baz danych
 Name:		gaby
 Version:	1.9.20
 Release:	1
@@ -6,10 +7,10 @@ Group:		X11/Applications
 Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
 License:	GPL
-Url:		http://gaby.netpedia.net
-Source0:	%{name}-%{version}.tar.gz
-Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Requires:	gtk+ >= 1.2.0
+Url:		http://gaby.sourceforge.net/
+Source0:	http://gaby.sourceforge.net/archives/%{name}-%{version}.tar.gz
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRequires:	gtk+-devel >= 1.2.0
 
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
@@ -21,6 +22,13 @@ access to databases a 'normal' user would like (addresses, books, ...)
 while keeping the ability to easily create databases for other needs.
 On a technical side it was designed with extensibility in mind and
 relies a lot on plug-ins.
+
+%description -l pl
+Gaby jest ma³ym osobistym menad¿erem baz danych u¿ywaj±cym GTK+ i
+GNOME. Zosta³ zaprojektowany aby dostarczyæ prosty dostêp do baz
+danych, które "zwyk³y" u¿ytkownik chcia³by mieæ (adresy, ksi±¿ki...),
+pozwalaj±c ³atwo tworzyæ bazy do innych celów. Od technicznej strony
+zosta³ zaprojektowany tak, by byæ rozszerzalnym poprzez pluginy.
 
 %prep
 %setup -q
