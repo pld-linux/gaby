@@ -12,30 +12,28 @@ Summary(pl):	Gaby - ma³y osobisty zarz±dca baz danych
 Name:		gaby
 Version:	2.0.2
 Release:	1
-Group:		X11/Applications
 License:	GPL
-Url:		http://gaby.sourceforge.net/
+Group:		X11/Applications
 Source0:	http://gaby.sourceforge.net/archives/%{name}-%{version}.tar.gz
 # Source0-md5:	1203f7a548e46bc0bf5987fb2e1508ee
 Patch0:		%{name}-DESTDIR.patch
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-BuildRequires:	libtool
+URL:		http://gaby.sourceforge.net/
 BuildRequires:	bison
-%{!?_without_gui:BuildRequires:		gtk+-devel >= 1.2.0}
-%{!?_without_python:BuildRequires:	python-devel}
+%{!?_without_gdk_pixbuf:BuildRequires:	gdk-pixbuf-devel}
 %{!?_without_gnome:BuildRequires:	gnome-libs-devel}
+%{!?_without_gui:BuildRequires:		gtk+-devel >= 1.2.0}
 %{!?_without_libglade:BuildRequires:	libglade-devel}
-# shouldn't this dependency be moved to libglade-devel ?
+BuildRequires:	libtool
 %{!?_without_libglade:BuildRequires:	libxml-devel}
 %{!?_without_xml:BuildRequires:		libxml-devel}
-%{!?_without_gdk_pixbuf:BuildRequires:	gdk-pixbuf-devel}
-%{!?_without_gui:Requires:	gtk+ >= 1.2.0}
-%{!?_without_python:Requires:	python}
-%{!?_without_gnome:Requires:	gnome-libs}
+%{!?_without_python:BuildRequires:	python-devel}
 # python-pygtk and gtk+-devel require to be installed with the same prefix
 # to be visible; currently not this case :(
 %{!?_without_python:%{!?_without_gui:Requires:	python-pygtk}}
-
+%{!?_without_gnome:Requires:	gnome-libs}
+%{!?_without_gui:Requires:	gtk+ >= 1.2.0}
+%{!?_without_python:Requires:	python}
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Gaby is a small personal databases manager using GTK+ and Gnome (if
@@ -71,8 +69,9 @@ CFLAGS="%{rpmcflags}" ./configure \
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} prefix=$RPM_BUILD_ROOT%{_prefix} install
 
+%{__make} install \
+	prefix=$RPM_BUILD_ROOT%{_prefix}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
