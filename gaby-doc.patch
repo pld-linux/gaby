@@ -1,0 +1,51 @@
+--- gaby-2.0.2/doc/make-doc.orig	Mon Sep 27 19:44:00 1999
++++ gaby-2.0.2/doc/make-doc	Tue Jun 24 14:50:49 2003
+@@ -21,7 +21,7 @@
+ 	exit
+ fi
+ 
+-db2html gaby.sgml > /dev/null
++db2html -V'%use-id-as-filename%' gaby.sgml > /dev/null
+ 
+ touch ts$1
+ 
+--- gaby-2.0.2/doc/C/Makefile.am.orig	Mon Jan 15 15:26:52 2001
++++ gaby-2.0.2/doc/C/Makefile.am	Tue Jun 24 14:54:29 2003
+@@ -6,7 +6,7 @@
+ 
+ gaby/index.html: gaby.sgml user.sgml advanced.sgml developer.sgml \
+ 			functions.sgml py_module.sgml
+-	-db2html gaby.sgml > /dev/null
++	-db2html -V '%use-id-as-filename%' gaby.sgml > /dev/null
+ 
+ functions.sgml:
+ 	-perl ../gaby-doc ../../src/*.c > functions.sgml
+--- gaby-2.0.2/doc/fr/Makefile.am.orig	Mon Jan 15 15:26:41 2001
++++ gaby-2.0.2/doc/fr/Makefile.am	Tue Jun 24 14:54:53 2003
+@@ -5,7 +5,7 @@
+ all-local: gaby/index.html
+ 
+ gaby/index.html: gaby.sgml user.sgml advanced.sgml developer.sgml
+-	-db2html gaby.sgml > /dev/null
++	-db2html -V '%use-id-as-filename%' gaby.sgml > /dev/null
+ 
+ clean-local:
+ 	rm -rf gaby gaby.junk
+--- gaby-2.0.2/doc/install-doc.in.orig	Mon Jun 18 15:24:18 2001
++++ gaby-2.0.2/doc/install-doc.in	Tue Jun 24 15:04:21 2003
+@@ -31,9 +31,12 @@
+ rm -rf $3/`gnome-config --datadir`/gnome/help/gaby/$1
+ 
+ ../mkinstalldirs $3/`gnome-config --datadir`/gnome/help/gaby/$1
+-ln -s $2/$1/*.html $3/`gnome-config --datadir`/gnome/help/gaby/$1
+-ln -s $2/$1/docbook.css $3/`gnome-config --datadir`/gnome/help/gaby/$1
+-ln -s $2/$1/stylesheet-images $3/`gnome-config --datadir`/gnome/help/gaby/$1
++cp $1/gaby/*.html $3/`gnome-config --datadir`/gnome/help/gaby/$1
++cp $1/gaby/*.css $3/`gnome-config --datadir`/gnome/help/gaby/$1
++mkdir $3/`gnome-config --datadir`/gnome/help/gaby/$1/stylesheet-images
++cp $1/gaby/stylesheet-images/* $3/`gnome-config --datadir`/gnome/help/gaby/$1/stylesheet-images/
++cp $1/topic.dat $3/`gnome-config --datadir`/gnome/help/gaby/$1/
++cp -R $1/gaby/*.css $3/`gnome-config --datadir`/gnome/help/gaby/$1
+ 
+ if [ "$1" = "C" ]
+ then
