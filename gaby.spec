@@ -16,7 +16,7 @@ Group:		X11/Applications
 License:	GPL
 Url:		http://gaby.sourceforge.net/
 Source0:	http://gaby.sourceforge.net/archives/%{name}-%{version}.tar.gz
-Patch0:		gaby-DESTDIR.patch
+Patch0:		%{name}-DESTDIR.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	libtool
 BuildRequires:	bison
@@ -67,7 +67,7 @@ CFLAGS="%{rpmcflags}" ./configure \
 	%{?_without_libglade:--without-libglade-config} \
 	%{?_without_xml:--without-xml-config} \
 	%{?_without_gdk_pixbuf:--disable-gdk_pixbuftest} \
-	
+
 %{__make}
 
 %install
@@ -82,17 +82,17 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS.gz BUGS.gz ChangeLog.gz Gabyrc NEWS.gz README.gz
-%doc README.translations.gz README.upgrading.gz TODO.gz TODO.more.gz 
-%doc doc/*.sgml doc/C/*.sgml 
+%doc README.translations.gz README.upgrading.gz TODO.gz TODO.more.gz
+%doc doc/*.sgml doc/C/*.sgml
 %{_sysconfdir}/gaby
 %{_libdir}/gaby
 %{_datadir}/gaby
-%attr(755,root,root) %{_bindir}/gaby 
-%attr(755,root,root) %{_bindir}/gabyprint 
-%attr(755,root,root) %{_bindir}/gbc 
-%attr(755,root,root) %{_bindir}/gcd 
-%attr(755,root,root) %{_bindir}/videobase 
-%attr(755,root,root) %{_bindir}/gnomecard 
+%attr(755,root,root) %{_bindir}/gaby
+%attr(755,root,root) %{_bindir}/gabyprint
+%attr(755,root,root) %{_bindir}/gbc
+%attr(755,root,root) %{_bindir}/gcd
+%attr(755,root,root) %{_bindir}/videobase
+%attr(755,root,root) %{_bindir}/gnomecard
 %attr(755,root,root) %{_bindir}/builder
 %lang(da) %{_datadir}/locale/da/LC_MESSAGES/gaby.mo
 %lang(de) %{_datadir}/locale/de/LC_MESSAGES/gaby.mo
