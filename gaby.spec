@@ -13,11 +13,6 @@ Name:		gaby
 Version:	2.0.2
 Release:	1
 Group:		X11/Applications
-Group(de):	X11/Applikationen
-Group(es):	X11/Aplicaciones
-Group(pl):	X11/Aplikacje
-Group(pt_BR):	X11/Aplicações
-Group(pt):	X11/Aplicações
 License:	GPL
 Url:		http://gaby.sourceforge.net/
 Source0:	http://gaby.sourceforge.net/archives/%{name}-%{version}.tar.gz
