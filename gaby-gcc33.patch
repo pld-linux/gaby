@@ -1,0 +1,11 @@
+--- gaby-2.0.2/builder/main.h.orig	Mon Jun 18 15:25:02 2001
++++ gaby-2.0.2/builder/main.h	Tue Jun 24 11:36:48 2003
+@@ -59,7 +59,7 @@
+ #  define N_(String) (String)
+ #endif /* ! ENABLE_NLS */
+ 
+-#define BVERSION "1.0 (for Gaby " ## VERSION ## ")"
++#define BVERSION "1.0 (for Gaby " VERSION ")"
+ 
+ /* this is for debugging, if you really don't want any useless data you should
+  * #define debug_print(format, args...)		;
