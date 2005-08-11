@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without  gtk		# without gtk+-based gui (text only)
+%bcond_without	gtk		# without gtk+-based gui (text only)
 %bcond_without	python		# plain gtk-based version without python support
 %bcond_without	gnome		# without gnome-based support
 %bcond_without	libglade	# without libglade config
