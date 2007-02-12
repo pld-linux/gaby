@@ -8,7 +8,7 @@
 %bcond_without	gdk_pixbuf	# without gdk-pixbuf
 #
 Summary:	Gaby is a small personal databases manager
-Summary(pl):	Gaby - ma³y osobisty zarz±dca baz danych
+Summary(pl.UTF-8):   Gaby - maÅ‚y osobisty zarzÄ…dca baz danych
 Name:		gaby
 Version:	2.0.2
 Release:	1
@@ -48,12 +48,12 @@ while keeping the ability to easily create databases for other needs.
 On a technical side it was designed with extensibility in mind and
 relies a lot on plug-ins.
 
-%description -l pl
-Gaby jest ma³ym osobistym zarz±dc± baz danych u¿ywaj±cym GTK+ i
-GNOME. Zosta³ zaprojektowany aby udostêpniæ prosty dostêp do baz
-danych, które "zwyk³y" u¿ytkownik chcia³by mieæ (adresy, ksi±¿ki...),
-pozwalaj±c ³atwo tworzyæ bazy do innych celów. Od technicznej strony
-zosta³ zaprojektowany tak, by byæ rozszerzalnym poprzez wtyczki.
+%description -l pl.UTF-8
+Gaby jest maÅ‚ym osobistym zarzÄ…dcÄ… baz danych uÅ¼ywajÄ…cym GTK+ i
+GNOME. ZostaÅ‚ zaprojektowany aby udostÄ™pniÄ‡ prosty dostÄ™p do baz
+danych, ktÃ³re "zwykÅ‚y" uÅ¼ytkownik chciaÅ‚by mieÄ‡ (adresy, ksiÄ…Å¼ki...),
+pozwalajÄ…c Å‚atwo tworzyÄ‡ bazy do innych celÃ³w. Od technicznej strony
+zostaÅ‚ zaprojektowany tak, by byÄ‡ rozszerzalnym poprzez wtyczki.
 
 %prep
 %setup -q
