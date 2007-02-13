@@ -8,7 +8,7 @@
 %bcond_without	gdk_pixbuf	# without gdk-pixbuf
 #
 Summary:	Gaby is a small personal databases manager
-Summary(pl.UTF-8):   Gaby - mały osobisty zarządca baz danych
+Summary(pl.UTF-8):	Gaby - mały osobisty zarządca baz danych
 Name:		gaby
 Version:	2.0.2
 Release:	1
