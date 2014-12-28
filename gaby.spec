@@ -24,7 +24,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
 %{?with_gdk_pixbuf:BuildRequires:	gdk-pixbuf-devel >= 0.7.0}
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 %{?with_gnome:BuildRequires:	gnome-libs-devel}
 %{?with_gui:BuildRequires:		gtk+-devel >= 1.2.5}
 %{?with_libglade:BuildRequires:	libglade-devel}
